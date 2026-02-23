@@ -22,7 +22,7 @@
 
 /datum/sex_action/grind_body/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/do_subtle
-	var/pleasure_target = 0
+	var/pleasure_target
 	var/zone_text
 	if(user.sexcon.force < SEX_FORCE_MID && user.sexcon.speed < SEX_SPEED_MID) // always subtle
 		do_subtle = 1
@@ -39,6 +39,7 @@
 			pleasure_target = 1
 		else
 			zone_text = lowertext(parse_zone(user.zone_selected))
+			pleasure_target = 0
 	user.sexcon.show_progress = !do_subtle
 	user.visible_message(user.sexcon.spanify_force("[user] [do_subtle ? pick("subtly","sneakily","covertly","stealthily","quietly") : user.sexcon.get_generic_force_adjective()] grinds over [target]'s [zone_text]..."), vision_distance = (do_subtle ? 1 : DEFAULT_MESSAGE_RANGE))
 	if(!do_subtle)
