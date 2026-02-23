@@ -430,16 +430,38 @@
 /datum/sex_controller/proc/after_intimate_climax()
 	if(user == target)
 		return
-	if(HAS_TRAIT(target, TRAIT_GOODLOVER))
+	var/user_goodlover = HAS_TRAIT(user, TRAIT_GOODLOVER)
+	var/target_goodlover = HAS_TRAIT(target, TRAIT_GOODLOVER)
+	if(target_goodlover)
 		if(!user.mob_timers["cumtri"])
 			user.mob_timers["cumtri"] = world.time
 			user.adjust_triumphs(1)
 			to_chat(user, span_love("Our loving is a true TRIUMPH!"))
-	if(HAS_TRAIT(user, TRAIT_GOODLOVER))
+	if(user_goodlover)
 		if(!target.mob_timers["cumtri"])
 			target.mob_timers["cumtri"] = world.time
 			target.adjust_triumphs(1)
 			to_chat(target, span_love("Our loving is a true TRIUMPH!"))
+	var/user_beautiful = HAS_TRAIT(user, TRAIT_BEAUTIFUL)
+	var/user_ugly = HAS_TRAIT(user, TRAIT_UNSEEMLY) || HAS_TRAIT(user, TRAIT_DISFIGURED)
+	var/target_beautiful = HAS_TRAIT(target, TRAIT_BEAUTIFUL)
+	var/target_ugly = HAS_TRAIT(target, TRAIT_UNSEEMLY) || HAS_TRAIT(target, TRAIT_DISFIGURED)
+	if(user_ugly && target_ugly || user_beautiful && target_beautiful) // both are ugly/beautiful, add made love buff
+		user.add_stress(/datum/stressevent/cummax)
+		target.add_stress(/datum/stressevent/cummax)
+	else // one of them is ugly, add debuff to non-ugly character
+		if(target_ugly && !user_ugly && !user_goodlover) // good lover are immune to ugly characters
+			if(user_beautiful) // stress event last longer
+				user.add_stress(/datum/stressevent/unseemly_made_love/beautiful)
+			else
+				user.add_stress(/datum/stressevent/unseemly_made_love)
+			target.add_stress(/datum/stressevent/cummax)
+		if(user_ugly && !target_ugly && !target_goodlover) // good lover are immune to ugly characters
+			if(target_beautiful) // stress event last twice
+				target.add_stress(/datum/stressevent/unseemly_made_love/beautiful)
+			else
+				target.add_stress(/datum/stressevent/unseemly_made_love)
+			user.add_stress(/datum/stressevent/cummax)
 
 /datum/sex_controller/proc/just_ejaculated()
 	return (last_ejaculation_time + 2 SECONDS >= world.time)
