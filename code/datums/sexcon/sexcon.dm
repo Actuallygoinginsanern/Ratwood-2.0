@@ -360,6 +360,12 @@
 			splashed_user.apply_status_effect(status_type)
 		else
 			splashed_type.refresh_cum()
+		if(!oral)
+			var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
+			if(testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+				splashed_user.apply_status_effect(/datum/status_effect/creampie_leak/long)
+			else
+				splashed_user.apply_status_effect(/datum/status_effect/creampie_leak)
 	after_ejaculation()
 	after_intimate_climax(oral)
 
@@ -373,6 +379,18 @@
 	id = "creampie"
 	alert_type = null // don't show an alert on screen
 	tick_interval = 7 MINUTES // use this time as our dry count down
+
+/datum/status_effect/creampie_leak
+	id = "creampie_leak"
+	alert_type = null // don't show an alert on screen
+	tick_interval = 12 SECONDS
+	duration = 30 SECONDS
+
+/datum/status_effect/creampie_leak/long
+	id = "creampie_leak_long"
+	alert_type = null // don't show an alert on screen
+	tick_interval = 12 SECONDS
+	duration = 60 SECONDS
 
 /datum/status_effect/facial/on_apply()
 	RegisterSignal(owner, list(COMSIG_COMPONENT_CLEAN_ACT, COMSIG_COMPONENT_CLEAN_FACE_ACT),PROC_REF(clean_up))
@@ -397,6 +415,12 @@
 			to_chat(owner, span_notice("I feel much cleaner now!"))
 			owner.add_stress(/datum/stressevent/bathcleaned)
 		owner.remove_status_effect(src)
+
+/datum/status_effect/creampie_leak/tick()
+	if(!get_location_accessible(owner, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+		return
+	add_cum_floor(get_turf(owner))
+	playsound(owner, pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 20, TRUE, -2, ignore_walls = FALSE)
 
 /datum/sex_controller/proc/ejaculate()
 	SEND_SIGNAL(user, COMSIG_MOB_EJACULATED)

@@ -331,6 +331,12 @@
 				btm.apply_status_effect(/datum/status_effect/facial/internal)
 			else
 				creampie.refresh_cum()
+			if(!btm.has_status_effect(/datum/status_effect/knot_gaped))
+				var/obj/item/organ/testicles/testes = top.getorganslot(ORGAN_SLOT_TESTICLES)
+				if(testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+					btm.apply_status_effect(/datum/status_effect/creampie_leak/long)
+				else
+					btm.apply_status_effect(/datum/status_effect/creampie_leak)
 		if(top.sexcon.knotted_part_partner&SEX_PART_JAWS)
 			var/datum/status_effect/facial/facial = btm.has_status_effect(/datum/status_effect/facial)
 			if(!facial)
