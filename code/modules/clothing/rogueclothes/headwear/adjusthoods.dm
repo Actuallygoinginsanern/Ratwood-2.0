@@ -141,7 +141,7 @@
 
 /obj/item/clothing/head/roguetown/roguehood/poacher
 	name = "weathered warden's hood"
-	desc = "A leather hood, sewn larger than usual to accomodate a helmet. There's some dried blood on its broken left antler. The price for true freedom, paid with someone else's life."
+	desc = "A leather hood, sewn larger than usual to accommodate a helmet. There's dried blood on its broken left antler. The price for true freedom, paid with someone else's life."
 	color = null
 	icon_state = "poacherhood"
 	item_state = "poacherhood"
