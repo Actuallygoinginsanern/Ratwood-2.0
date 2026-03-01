@@ -1,4 +1,5 @@
 GLOBAL_LIST_EMPTY(musicboxes) //list of all music boxes
+GLOBAL_VAR_INIT(musicboxes_last_upload, 0) //last time of the last upload, to prevent multiple uploads within seconds of eachother
 
 /datum/looping_sound/dmusloop
 	mid_sounds = list()
@@ -96,6 +97,10 @@ GLOBAL_LIST_EMPTY(musicboxes) //list of all music boxes
 	if(!loaded)
 		return
 
+	if(world.time < GLOB.musicboxes_last_upload + 30 SECONDS)
+		say("NOT YET!")
+		return
+
 	var/filename = "[infile]"
 	var/file_ext = lowertext(copytext(filename, -4))
 	var/file_size = length(infile)
@@ -107,6 +112,7 @@ GLOBAL_LIST_EMPTY(musicboxes) //list of all music boxes
 		to_chat(user, span_warning("TOO BIG. 6 MEGS OR LESS."))
 		return
 	lastfilechange = world.time
+	GLOB.musicboxes_last_upload = world.time
 	var/rng_number = "[rand(1,99)]" // prevent chance of file overwriting
 	fcopy(infile,"data/jukeboxuploads/[user.ckey]/[rng_number][filename]")
 	curfile = file("data/jukeboxuploads/[user.ckey]/[rng_number][filename]")
