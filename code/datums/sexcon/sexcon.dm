@@ -1100,6 +1100,59 @@
 				var/obj/item/bodypart/groin = target.get_bodypart(check_zone(BODY_ZONE_PRECISE_GROIN))
 				groin.add_wound(/datum/wound/fracture)
 
+/datum/proc/werewolf_sex_infect_attempt(mob/living/carbon/human/top, mob/living/carbon/human/bottom)
+
+	if(!top || !bottom || !top.mind || !bottom.mind)
+		return
+
+	var/datum/antagonist/werewolf/WWtop
+	var/datum/antagonist/werewolf/WWbottom
+	var/infection_probability = 40
+	if(top.mind.has_antag_datum(/datum/antagonist/werewolf))
+		WWtop = top.mind.has_antag_datum(/datum/antagonist/werewolf/)
+
+	if(bottom.mind.has_antag_datum(/datum/antagonist/werewolf))
+		WWbottom = bottom.mind.has_antag_datum(/datum/antagonist/werewolf/)
+
+	if(WWtop && WWbottom)
+		return
+
+	if(WWtop && WWtop.transformed && !WWbottom)
+		if(prob(infection_probability))
+			bottom.werewolf_infect_attempt()
+			return
+
+	if(WWbottom && WWbottom.transformed && !WWtop)
+		if(prob(infection_probability))
+			top.werewolf_infect_attempt()
+			return
+
+/datum/proc/deadite_sex_infect_attempt(mob/living/carbon/human/top, mob/living/carbon/human/bottom)
+	
+	if(!top || !bottom || !top.mind || !bottom.mind)
+		return
+	var/datum/antagonist/zombie/ZMtop
+	var/datum/antagonist/zombie/ZMbottom
+	var/infection_probability = 40
+	if(top.mind.has_antag_datum(/datum/antagonist/zombie))
+		ZMtop = top.mind.has_antag_datum(/datum/antagonist/zombie/)
+
+	if(bottom.mind.has_antag_datum(/datum/antagonist/zombie))
+		ZMbottom = bottom.mind.has_antag_datum(/datum/antagonist/zombie/)
+
+	if(ZMtop && ZMbottom)
+		return
+
+	if(ZMtop && !ZMbottom)
+		if(prob(infection_probability))
+			bottom.apply_status_effect(/datum/status_effect/zombie_infection)
+			return
+
+	if(ZMbottom && !ZMtop)
+		if(prob(infection_probability))
+			top.apply_status_effect(/datum/status_effect/zombie_infection)
+			return
+
 #undef SEX_ZONE_NULL
 #undef SEX_ZONE_GROIN
 #undef SEX_ZONE_GROIN_GRAB
