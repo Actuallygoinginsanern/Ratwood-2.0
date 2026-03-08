@@ -269,6 +269,7 @@
 #define JDO_GATEMASTER 8.5
 #define JDO_SHERIFF 8.6
 #define JDO_TOWNGUARD 8.7
+#define JDO_CITYGUARD 8.7.5
 #define JDO_DUNGEONEER 8.8
 #define JDO_VET 8.9
 #define JDO_BOGGUARD 9.1
@@ -412,6 +413,7 @@
 	/datum/job/roguetown/manorguard,\
 	/datum/job/roguetown/sheriff,\
 	/datum/job/roguetown/squire,\
+	/datum/job/roguetown/cityguard,\
 	/datum/job/roguetown/guardsman
 
 #define INQUISITION_ROLES \
