@@ -148,6 +148,16 @@
 		to_chat(data.caster, span_warning("Cannot see through walls!"))
 		return FALSE
 
+	for(var/obj/structure/roguewindow/W in end_spot.contents)
+		to_chat(data.caster, span_warning("Cannot teleport into a window!"))
+		return FALSE
+	for(var/obj/structure/bars/B in end_spot.contents)
+		to_chat(data.caster, span_warning("Cannot teleport into bars!"))
+		return FALSE
+	for(var/obj/structure/gate/G in end_spot.contents)
+		to_chat(data.caster, span_warning("Cannot teleport into a gate!"))
+		return FALSE
+
 	data.caster.stamina_add(fatiguecost)
 
 	new /obj/effect/temp_visual/spell_visual/blink_warning(start_spot)
