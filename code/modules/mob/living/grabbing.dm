@@ -25,7 +25,10 @@
 	. |= FALL_NO_MESSAGE
 
 /atom/movable //reference to all obj/item/grabbing
-	var/list/grabbedby
+	var/list/grabbedby = list()
+
+/turf
+	var/list/grabbedby = list()
 
 /obj/item/grabbing/Initialize(mapload)
 	. = ..()
@@ -35,9 +38,7 @@
 	valid_check()
 
 /obj/item/grabbing/proc/valid_check()
-	if(!grabbee || !grabbed)
-		qdel(src)
-		return FALSE
+	// We require adjacency to count the grab as valid
 	if(grabbee.Adjacent(grabbed))
 		return TRUE
 	grabbee.stop_pulling(FALSE)
@@ -87,10 +88,10 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
-		LAZYREMOVE(I.grabbedby, src)
+		I.grabbedby -= src
 	if(ismob(grabbed))
 		var/mob/M = grabbed
-		LAZYREMOVE(M.grabbedby, src)
+		M.grabbedby -= src
 		if(iscarbon(M) && sublimb_grabbed)
 			var/mob/living/carbon/carbonmob = M
 			var/obj/item/bodypart/part = carbonmob.get_bodypart(sublimb_grabbed)
@@ -99,9 +100,12 @@
 			// In this case, grabbed will be the mob, and sublimb_grabbed will be the weapon, rather than a bodypart
 			// This means we should skip any further processing for the bodypart
 			if(part)
-				LAZYREMOVE(part.grabbedby, src)
+				part.grabbedby -= src
 				part = null
 				sublimb_grabbed = null
+	if(isturf(grabbed))
+		var/turf/T = grabbed
+		T.grabbedby -= src
 	if(grabbee)
 		if(grabbee.r_grab == src)
 			grabbee.r_grab = null
@@ -109,7 +113,6 @@
 			grabbee.l_grab = null
 		if(grabbee.mouth == src)
 			grabbee.mouth = null
-		grabbee = null
 	for(var/datum/D in dependents)
 		D.grabdropped(src)
 	return ..()

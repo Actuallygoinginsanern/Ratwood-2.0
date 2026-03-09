@@ -42,9 +42,11 @@
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
 	if(eye_color && (icon_state == "eyeball"))
+	{
 		var/mutable_appearance/iris_overlay = mutable_appearance(src.icon, "eyeball-iris")
 		iris_overlay.color = "#" + eye_color
 		. += iris_overlay
+	}
 
 
 /obj/item/organ/eyes/update_accessory_colors()
@@ -62,6 +64,7 @@
 	eyes_dna.eye_color = eye_color
 	eyes_dna.heterochromia = heterochromia
 	eyes_dna.second_color = second_color
+
 
 /obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
 	. = ..()
@@ -363,7 +366,18 @@
 	. = ..()
 	if(!active || . & EMP_PROTECT_SELF)
 		return
-	deactivate(silent = TRUE)
+
+// abductor-specific eye organ. initially uses the same graphics as the
+// normal eyes; the player can replace the DMI later with a blank version
+// and the species will automatically get them.  We want them entirely
+// invisible, so disable the visible flag rather than relying on an icon.
+/obj/item/organ/abductor_eyes
+	parent_type = /obj/item/organ/eyes
+	name = "abductor eyes"
+	desc = ""
+	icon_state = "abductor_1"  // blank state added to eyes.dmi (ignored when hidden)
+	visible_organ = FALSE      // don't render at all on the body
+	// nothing else needs changing; it behaves exactly like normal eyes
 
 /obj/item/organ/eyes/robotic/glow/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE)
 	. = ..()

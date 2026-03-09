@@ -421,6 +421,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	H.facial_hair_color = H.hair_color
 	var/list/skins = get_skin_list()
 	H.skin_tone = skins[pick(skins)]
+	// force white for abductors (simpler than adding per-species procs)
+	if(src.id == "abductor")
+		H.skin_tone = "ffffff"
 	H.eye_color = random_eye_color()
 	H.accessory = "Nothing"
 	if(H.dna)
@@ -455,7 +458,15 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	regenerate_organs(C,old_species, pref_load=pref_load)
 	if(ishuman(C))
+	{
 		apply_markings_to_body_parts(C.dna.body_markings, C)
+		// ensure abductor skulls always stay white
+		if(src.id == "abductor")
+		{
+			var/mob/living/carbon/human/H = C
+			H.skin_tone = "ffffff"
+		}
+	}
 
 	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
 		C.dna.blood_type = exotic_bloodtype
