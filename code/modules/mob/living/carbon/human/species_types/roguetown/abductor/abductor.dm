@@ -73,4 +73,3 @@
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		OFFSET_BREASTS_F = list(0,-1)
 	)
-	
