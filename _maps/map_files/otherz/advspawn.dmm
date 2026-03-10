@@ -85,11 +85,14 @@
 /turf/open/floor/rogue/herringbone,
 /area/rogue/underworld/adventurespawn)
 "mH" = (
-/obj/structure/fluff/traveltile/rockhillentrance{
-	aportalgoesto = "rockhill3";
-	name = "Southern path to Rockhill"
+/obj/effect/wisp/prestidigitation{
+	color = "#ff75b1";
+	desc = "A small, fiery ball of light made up of mystical energy.";
+	name = "Will-o'-the-wisp";
+	pixel_x = 0
 	},
-/turf/open/floor/rogue/churchrough,
+/obj/structure/flora/roguetree/underworld,
+/turf/open/floor/rogue/underworld/road,
 /area/rogue/underworld/adventurespawn)
 "mM" = (
 /obj/structure/fluff/wallclock/vampire,
@@ -177,8 +180,11 @@
 /turf/open/floor/rogue/underworld/road,
 /area/rogue/underworld/adventurespawn)
 "vv" = (
-/obj/machinery/gear_painter,
-/turf/open/floor/rogue/churchrough,
+/obj/structure/fluff/traveltile/rockhillentrance{
+	aportalgoesto = "rockhill3";
+	name = "Southern path to Rockhill"
+	},
+/turf/open/floor/rogue/underworld/road,
 /area/rogue/underworld/adventurespawn)
 "wH" = (
 /obj/effect/wisp/prestidigitation{
@@ -211,14 +217,8 @@
 /turf/open/floor/rogue/herringbone,
 /area/rogue/underworld/adventurespawn)
 "yt" = (
-/obj/effect/wisp/prestidigitation{
-	color = "#ff75b1";
-	desc = "A small, fiery ball of light made up of mystical energy.";
-	name = "Will-o'-the-wisp";
-	pixel_x = 0
-	},
-/obj/structure/flora/roguetree/underworld,
-/turf/open/floor/rogue/underworld/road,
+/obj/machinery/gear_painter,
+/turf/open/floor/rogue/churchrough,
 /area/rogue/underworld/adventurespawn)
 "yF" = (
 /obj/structure/fluff/traveltile/rockhillentrance{
@@ -639,7 +639,7 @@ Ta
 MR
 Xc
 Xc
-yt
+mH
 Aa
 MR
 Ta
@@ -662,8 +662,8 @@ ec
 MR
 Ta
 Ta
-Ta
-Ta
+MR
+MR
 Ta
 MR
 Xc
@@ -726,7 +726,7 @@ Ta
 MR
 MR
 MR
-yt
+mH
 Aa
 VB
 VB
@@ -810,7 +810,7 @@ aQ
 JE
 MR
 Ta
-vv
+yt
 Ta
 MR
 MR
@@ -1009,7 +1009,7 @@ MR
 MR
 Xc
 Xc
-Ta
+MR
 MR
 Ta
 Ta
@@ -1186,7 +1186,7 @@ Xc
 Xc
 MR
 Ta
-Ta
+MR
 MR
 Xc
 Xc
@@ -1214,8 +1214,8 @@ fM
 Xc
 Xc
 ec
-Ta
-mH
+MR
+vv
 MR
 Xc
 Xc
