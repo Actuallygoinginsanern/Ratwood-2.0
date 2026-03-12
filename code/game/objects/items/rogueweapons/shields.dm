@@ -286,7 +286,7 @@
 	icon_state = "ancientsh"
 	smeltresult = /obj/item/ingot/purifiedaalloy
 
-/obj/item/rogueweapon/shield/tower/raneshen
+/obj/item/rogueweapon/shield/tower/zyb
 	name = "rider shield"
 	desc = "A shield of Zybantine design. Clever usage of wood, iron, and leather make an impressive match for any weapon."
 	icon_state = "desert_rider"
@@ -297,7 +297,7 @@
 	max_integrity = 220 //not fully metal but not fully wood either
 	anvilrepair = /datum/skill/craft/carpentry
 
-/obj/item/rogueweapon/shield/tower/raneshen/getonmobprop(tag)
+/obj/item/rogueweapon/shield/tower/zyb/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

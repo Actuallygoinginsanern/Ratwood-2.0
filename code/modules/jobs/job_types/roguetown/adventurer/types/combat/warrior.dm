@@ -89,8 +89,8 @@
 				head = /obj/item/clothing/head/roguetown/helmet/kettle
 				gloves = /obj/item/clothing/gloves/roguetown/angle
 			if("Light Zybantine Armor")
-				shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
-				pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/raneshen
+				shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/zyb
+				pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/zyb
 				head = /obj/item/clothing/head/roguetown/roguehood/shalal/hijab
 				gloves = /obj/item/clothing/gloves/roguetown/angle
 				wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
