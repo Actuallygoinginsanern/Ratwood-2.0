@@ -161,3 +161,28 @@
 					P.buckle_mob(pulling, TRUE, TRUE, 90, 0, 0)
 				if(isliving(pulling))
 					P = pulling
+
+
+//purely cosmetic
+
+
+/obj/structure/stairs/ccw
+	name = "curved stairs"
+	icon = 'icons/obj/stairscurve.dmi'
+	icon_state = "woodCCW"
+	
+/obj/structure/stairs/cw
+	name = "curved stairs"
+	icon = 'icons/obj/stairscurve.dmi'
+	icon_state = "woodCW"
+
+
+/obj/structure/stairs/stone/ccw
+	name = "curved stairs"
+	icon = 'icons/obj/stairscurve.dmi'
+	icon_state = "stoneCCW"
+
+/obj/structure/stairs/stone/cw
+	name = "curved stairs"
+	icon = 'icons/obj/stairscurve.dmi'
+	icon_state = "stoneCW"
