@@ -18,6 +18,5 @@
 
 /datum/component/waddling/proc/Waddle()
 	animate(parent, pixel_z = 4, time = 0)
-	animate(parent, pixel_z = 0, transform = turn(matrix(), -12), time = 2)
-	animate(parent, pixel_z = 0, transform = turn(matrix(), 12), time = 2)
-	animate(parent, pixel_z = 0, transform = matrix(), time = 2)
+	animate(pixel_z = 0, transform = turn(matrix(), pick(-12, 0, 12)), time=2)
+	animate(pixel_z = 0, transform = matrix(), time = 0)
